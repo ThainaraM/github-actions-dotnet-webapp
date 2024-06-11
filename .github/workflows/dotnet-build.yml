@@ -1,0 +1,44 @@
+name: .NET Workflow CI/CD
+
+on:
+  push:
+    branches:
+      - main
+  schedule:
+    - cron: '0 * * * *' # Executa a cada hora
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '8.x' 
+
+      - name: Restore dependencies
+        run: dotnet restore
+
+      - name: Build
+        run: dotnet build --configuration Release --no-restore
+
+      - name: Test
+        run: dotnet test --no-restore --verbosity normal
+
+      - name: Custom script for push event
+        if: github.event_name == 'push'
+        run: |
+          echo "Running custom script for push event"
+          dotnet publish --configuration Release --output ./publish
+          
+
+      - name: Custom script for scheduled event
+        if: github.event_name == 'schedule'
+        run: |
+          echo "Running custom script for scheduled event"
+          echo "Performing database backup..."
+          echo "Performing scheduled maintenance tasks"
