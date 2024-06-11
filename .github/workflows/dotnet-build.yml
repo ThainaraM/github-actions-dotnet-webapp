@@ -8,10 +8,13 @@ on:
     - cron: '0 * * * *' # Executa a cada hora
 
 jobs:
-   Build:
+  build:
     runs-on: ubuntu-latest
 
     steps:
+      - name: 'Checkout GitHub Actions'
+        uses: actions/checkout@master
+
       - name: Checkout repository
         uses: actions/checkout@v2
 
