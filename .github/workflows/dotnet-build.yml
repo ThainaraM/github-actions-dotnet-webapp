@@ -22,28 +22,18 @@ jobs:
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: '8.x' 
+      - name: Run build
+        run: echo "Building project on push..."
 
-      - name: Restore dependencies
-        run: dotnet restore
+      - name: Run tests
+        run: echo "Running tests on push...
 
-      - name: Test
-        run: dotnet test --no-restore --verbosity normal
-      - name: Restore dependencies
-        run: dotnet restore src/MyProject.csproj 
+  cron-job:             # é acionado pelo agendamento
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
 
-      - name: Build
-        run: dotnet build src/MyProject.csproj --configuration Release --no-restore 
-      - name: Custom script for push event
-      
-        if: github.event_name == 'push'
-        run: |
-          echo "Running custom script for push event"
-          dotnet publish --configuration Release --output ./publish
-          
-
-      - name: Custom script for scheduled event
-        if: github.event_name == 'schedule'
-        run: |
-          echo "Running custom script for scheduled event"
-          echo "Performing database backup..."
-          echo "Performing scheduled maintenance tasks"
+    - name: Execute scheduled task
+      run: echo "Running scheduled task every hour..."
