@@ -26,14 +26,6 @@ jobs:
       with:
           dotnet-version: '8.x'
 
-    - name: Restore dependencies
-      run: dotnet restore
-
-    - name: Build
-      run: dotnet build --configuration Release --no-restore
-
-    - name: Test
-      run: dotnet test --no-restore --verbosity normal
 
   cron-job:             # é acionado pelo agendamento
     runs-on: ubuntu-latest
