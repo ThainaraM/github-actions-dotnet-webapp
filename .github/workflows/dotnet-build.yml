@@ -8,7 +8,7 @@ on:
     - cron: '0 * * * *' # Executa a cada hora
 
 jobs:
-  build:
+  push-job:             # é acionado pelo evento de push
     runs-on: ubuntu-latest
 
     steps:
