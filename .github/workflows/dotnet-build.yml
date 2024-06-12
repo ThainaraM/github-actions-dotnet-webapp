@@ -28,8 +28,13 @@ jobs:
 
       - name: Test
         run: dotnet test --no-restore --verbosity normal
+      - name: Restore dependencies
+        run: dotnet restore src/MyProject.csproj 
 
+      - name: Build
+        run: dotnet build src/MyProject.csproj --configuration Release --no-restore 
       - name: Custom script for push event
+      
         if: github.event_name == 'push'
         run: |
           echo "Running custom script for push event"
