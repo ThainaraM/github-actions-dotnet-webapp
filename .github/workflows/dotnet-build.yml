@@ -10,24 +10,16 @@ on:
 jobs:
   push-job:             # é acionado pelo evento de push
     runs-on: ubuntu-latest
-
+    
     steps:
-      - name: 'Checkout GitHub Actions'
-        uses: actions/checkout@master
+    - name: Checkout repository
+      uses: actions/checkout@v2
 
-      - name: Checkout repository
-        uses: actions/checkout@v2
+    - name: Run build
+      run: echo "Building project on push..."
 
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v3
-        with:
-          dotnet-version: '8.x' 
-          
-      - name: Run build
-        run: echo "Building project on push..."
-
-      - name: Run tests
-        run: echo "Running tests on push...
+    - name: Run tests
+      run: echo "Running tests on push...
 
   cron-job:             # é acionado pelo agendamento
     runs-on: ubuntu-latest
