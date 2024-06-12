@@ -19,7 +19,7 @@ jobs:
       run: echo "Building project on push..."
 
     - name: Run tests
-      run: echo "Running tests on push...
+      run: echo "Running tests on push..."
 
   cron-job:             # é acionado pelo agendamento
     runs-on: ubuntu-latest
